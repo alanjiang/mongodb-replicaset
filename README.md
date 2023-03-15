@@ -59,13 +59,13 @@ systemLog.path = /app/mongodb/log
 
 
 
-3, 部署mongoDB 副本集
+# 3 部署mongoDB 副本集
 
-3.1 官方文档
+## 3.1 官方文档
+
 https://www.mongodb.com/docs/manual/tutorial/deploy-replica-set/
 
-
-3.2 设置环境变量
+## 3.2 设置环境变量
 
 vi /etc/profile
 
@@ -73,8 +73,7 @@ MONGO_HOME=/XXX
 PATH=$MONGO_HOME/bin:$PATH
 export MONGO_HOME PATH
 
-
-3.3 默认配置文件
+## 3.3 默认配置文件
 
 mognDB 默认启动脚本：
 /usr/bin/mongod 
@@ -92,24 +91,25 @@ replication:
   replSetName: tx  #副本集的名称
   enableMajorityReadConcern: false
 
-3.4  生成认证 rs.key 
+## 3.4  生成认证 rs.key 
 
 mkdir -p /etc/mongod
 
 openssl rand -base64 741 > rs.key
 
-4, mongoDB 命令 
+# 4  mongoDB 命令 
 
-4.1  启动
+## 4.1  启动
 
 mongod  -f /etc/mongod.conf --replSet=tx
 
-
-4.2 关闭服务 
+## 4.2 关闭服务 
 
 mongod --shutdown --dbpath /app/mongodb/db
 
-4.2 客户端连接
+## 4.2 客户端创建副本集
+
+
 
 $mongosh 
 
@@ -145,5 +145,4 @@ db.createUser(
 db.auth("root", "@123_79_200")
 
 ```
-
 
