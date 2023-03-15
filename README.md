@@ -128,21 +128,33 @@ $mongosh
 
 # 5 配置用户 
 
-
+## 5.1 先配置超管
 
 进入主节点：
 
 use admin
 
-```
-db.createUser(
-  {
-    user: "root",
-    pwd: "@123_79_200",
-    roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]
-  }
-)
-db.auth("root", "@123_79_200")
+以下才是配置超管：
 
+```
+db.createUser({
+    user: "admin",
+    pwd: "@123_79_200",
+    roles: ["root"]
+  })
+```
+
+
+
+‘
+
+## 5.2 再配置数据库管理员 
+
+
+
+```
+use tx-biz
+
+db.createUser({user:"root",pwd: "hao#231",roles: [{ role: "readWrite", db:"tx-biz"}]})
 ```
 
